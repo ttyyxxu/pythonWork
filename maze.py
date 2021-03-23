@@ -34,15 +34,23 @@ def findshortest(maze, path = [], shortest=None):
     return shortest
 
 
-MAZE = [
-0, 1, 0, 0, 0, 1,
-0, 1, 0, 1, 0, 1,
-0, 0, 0, 1, 0, 0,
-0, 1, 1, 1, 1, 0
-]
+# MAZE = [
+# 0, 1, 0, 0, 0, 1,
+# 0, 1, 0, 1, 0, 1,
+# 0, 0, 0, 1, 0, 0,
+# 0, 1, 1, 1, 1, 0
+# ]
 
 Rows = 4
-Columns = 6
+Columns = 7
+
+MAZE = [
+0, 1, 0, 0, 0, 0, 0,
+0, 1, 0, 1, 0, 1, 0,
+0, 0, 0, 1, 0, 1, 0,
+0, 1, 1, 1, 1, 0, 0,
+]
+
 
 
 reshapedMaze = np.array(MAZE).reshape(Rows, Columns)
