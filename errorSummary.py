@@ -25,13 +25,11 @@ G:\nt\f 633
 F:\fop\ywzqaop 631
 F:\yay\jc\ywzqaop 631'''
 q = deque(maxlen=8)
-for i in range(8):
-    q.append(errorandCount("",0))
 
 for error in re.findall(r'[a-zA-Z0-9]+\s[0-9]+', ERRORs):
-    for i in range(8):
-        if q[i].error == error:
-            q[i].add1()
+    for i in q:
+        if i.error == error:
+            i.add1()
             break
     else:
         q.append(errorandCount(error,1))
