@@ -1,0 +1,24 @@
+MDS mirror data structure 存储inode以外mirror的数据
+
+sysctl -aN | grep pig
+vm.uma_zalloc_pigs 内存的使用情况
+vnlru -> 最早之前用的vode释放掉
+vnode 这个数据结构中，有指向 inode/LIN 的指针。
+vnode 这个概念只在内存中，硬盘上没有。
+
+Coalescer
+Write cache enable / disable
+/ifs上的所有写，都由efs.ko负责
+kt: coalescer flush: 负责将coalescer写缓存里的数据，刷到磁盘的进程。
+
+bam_write: 
+"block" allocate manager
+
+Endurant Cache
+small sync write. 
+sysctl efs.bam.ec.known_logstores
+
+Cache, Lazy locks
+
+isi_flush 清空L1,L2 cache
+isi_cache_stats -v
