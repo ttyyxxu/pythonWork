@@ -62,28 +62,24 @@ def minimumBribes(q):
     bribes = 0
     for pos, i in enumerate(q):
         orig_num = pos+1
+        i_am_brided_by = 0
         if (i - orig_num) > 2:
             print("Too chaotic")
             return
-        start = pos - 1 if pos > 1 else 0
-        end = i - 1
-
-
-        climbed = 0
-        for j in range(pos+1,L):
-            if i > q[j]:
-                climb +=1
-            if climb > 2:
-                print("Too chaotic")
-                return
-        bribes += climb
+        if (i - orig_num) > 0: # +1 or +2
+            i_am_brided_by += 0
+        else: # i-1 <= pos
+            start = i-2 if i > 2 else 0
+            end = pos
+            for j in range(start,end):
+                if q[j] > i:
+                    i_am_brided_by +=1
+        bribes += i_am_brided_by
     print(bribes)
 
 minimumBribes([5,1,2,3,7,8,6,4])
 minimumBribes([1,2,5,3,7,8,6,4]) # 7
+minimumBribes([1,2,5,3,7,8,6,4,10,11,12,13,9])
 # [1,2,3,4,5,6,7]
 # [2,3,4,5,7,6,1]
 
-# [2,1,5,3,6,7,4]
-i= 0,1,2,3,4,5,6
-q[i]
