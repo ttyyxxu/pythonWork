@@ -36,10 +36,13 @@ def minimumBribes_old(q):
             bribes += climb
     print(int(bribes))
 
-def minimumBribes(q):
+'''
+O(n^2) correct but too slow
+'''
+def minimumBribes_slow(q):
     L = len(q)
     bribes = 0
-    for pos,i in enumerate(q):
+    for pos, i in enumerate(q):
         climb = 0
         for j in range(pos+1,L):
             if i > q[j]:
@@ -50,6 +53,37 @@ def minimumBribes(q):
         bribes += climb
     print(bribes)
 
+'''
+person who bribed me, couldn't be +2 ahead of my original pos
+'''
+
+def minimumBribes(q):
+    L = len(q)
+    bribes = 0
+    for pos, i in enumerate(q):
+        orig_num = pos+1
+        if (i - orig_num) > 2:
+            print("Too chaotic")
+            return
+        start = pos - 1 if pos > 1 else 0
+        end = i - 1
+
+
+        climbed = 0
+        for j in range(pos+1,L):
+            if i > q[j]:
+                climb +=1
+            if climb > 2:
+                print("Too chaotic")
+                return
+        bribes += climb
+    print(bribes)
 
 minimumBribes([5,1,2,3,7,8,6,4])
-minimumBribes([1,2,5,3,7,8,6,4])
+minimumBribes([1,2,5,3,7,8,6,4]) # 7
+# [1,2,3,4,5,6,7]
+# [2,3,4,5,7,6,1]
+
+# [2,1,5,3,6,7,4]
+i= 0,1,2,3,4,5,6
+q[i]
