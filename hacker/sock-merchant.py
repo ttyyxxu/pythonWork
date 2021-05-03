@@ -55,10 +55,10 @@ def minimumBribes_slow(q):
 
 '''
 person who bribed me, couldn't be +2 ahead of my original pos
+I only need to check between my original position-1, along to my current position
 '''
 
 def minimumBribes(q):
-    L = len(q)
     bribes = 0
     for pos, i in enumerate(q):
         orig_num = pos+1
