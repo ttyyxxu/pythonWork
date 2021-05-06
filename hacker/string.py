@@ -22,6 +22,19 @@ def makeAnagram(a,b):
 
 def isValid(s):
     word_counts = Counter(s)
-    print(word_counts.values())
+    if len(s) <= 1:
+        return "YES"
+    freq = sorted(word_counts.values())
 
-isValid('aabbccddeefghi')
+    if freq[0] == freq[-1]:
+        return "YES"
+    elif freq[0] == freq[-2] and freq[-2] == freq[-1] - 1:
+        return "YES"
+    elif freq[1] == freq[-1] and freq[0] == 1:
+        return "YES"
+    else:
+        return "NO"
+
+
+print(isValid('aabbcd'))
+print(isValid('abcdefghhgfedecba'))
