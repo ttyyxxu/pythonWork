@@ -1,3 +1,5 @@
+from collections import Counter
+
 def makeAnagram(a,b):
     delete_needed = 0
     char_checked = []
@@ -14,5 +16,12 @@ def makeAnagram(a,b):
 
     return delete_needed
 
-print(makeAnagram('cde','dcf'))
-print(makeAnagram('cde','abc'))
+# print(makeAnagram('cde','dcf'))
+# print(makeAnagram('cde','abc'))
+
+
+def isValid(s):
+    word_counts = Counter(s)
+    print(word_counts.values())
+
+isValid('aabbccddeefghi')
