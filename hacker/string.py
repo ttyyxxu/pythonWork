@@ -1,7 +1,8 @@
 from collections import Counter
 from itertools import combinations
 
-def makeAnagram(a,b):
+
+def makeAnagram(a, b):
     delete_needed = 0
     char_checked = []
     for s in a:
@@ -16,6 +17,7 @@ def makeAnagram(a,b):
             delete_needed += abs(a.count(t) - b.count(t))
 
     return delete_needed
+
 
 # print(makeAnagram('cde','dcf'))
 # print(makeAnagram('cde','abc'))
@@ -50,11 +52,12 @@ def substrCount(n, s):
             if s[x] == s[y]:
                 count += 1
             else:
-                if s[x:y] == s[y+1:2*y-x+1]:
+                if s[x:y] == s[y + 1:2 * y - x + 1]:
                     count += 1
                 break
 
     return count
+
 
 ## logic is simple but very very slow
 def commonChild_slow(s1, s2):
@@ -67,12 +70,13 @@ def commonChild_slow(s1, s2):
         if char2 in s1:
             s2_new = s2_new + char2
 
-    for i in range(min(len(s1_new),len(s2_new)),0,-1):
-        for child in combinations(s1_new,i):
-            if child in combinations(s2_new,i):
+    for i in range(min(len(s1_new), len(s2_new)), 0, -1):
+        for child in combinations(s1_new, i):
+            if child in combinations(s2_new, i):
                 # print(child)
                 return i
     return 0
+
 
 def commonChild_too_hard_to_implement(s1, s2):
     longest = 0
@@ -83,16 +87,17 @@ def commonChild_too_hard_to_implement(s1, s2):
             continue
         else:
             child = child + start
-            for char in s1[pos_in_s1+1::]:
-                new_pos_in_s2 = s2[pos_in_s2+1::].find(char)
+            for char in s1[pos_in_s1 + 1::]:
+                new_pos_in_s2 = s2[pos_in_s2 + 1::].find(char)
                 if new_pos_in_s2 != -1:
-                    pos_in_s2 = new_pos_in_s2 + pos_in_s2 +1
+                    pos_in_s2 = new_pos_in_s2 + pos_in_s2 + 1
                     child += char
-                    print(child,pos_in_s2)
+                    print(child, pos_in_s2)
             if len(child) > longest:
                 longest = len(child)
                 print(child)
     return longest
+
 
 def commonChild_still_too_slow(s1, s2):
     s1_new = ''
@@ -104,9 +109,9 @@ def commonChild_still_too_slow(s1, s2):
     for char2 in s2:
         if char2 in s1:
             s2_new = s2_new + char2
-    print(s1_new,s2_new)
-    for i in range(min(len(s1_new),len(s2_new)),0,-1):
-        for child in combinations(s1_new,i):
+    print(s1_new, s2_new)
+    for i in range(min(len(s1_new), len(s2_new)), 0, -1):
+        for child in combinations(s1_new, i):
             start = 0
             for char in child:
                 shift = s2_new[start::].find(char)
@@ -120,5 +125,44 @@ def commonChild_still_too_slow(s1, s2):
                     return len(child)
     return 0
 
-print(commonChild("AA","BB"))
-print(commonChild("WEWOUCUIDGCGTRMEZEPXZFEJWISRSBBSYXAYDFEJJDLEBVHHKS","FDAGCXGKCTKWNECHMRXZWMLRYUCOCZHJRRJBOAJOQJZZVUYXIC"))
+
+## dynamic programming
+
+def commonChild_DP_yet_slow(s1, s2):
+    print("hell")
+    m, n = len(s1), len(s2)
+    if m == 1:
+        return 1 if s1[m - 1] in s2 else 0
+    if n == 1:
+        return 1 if s2[n - 1] in s1 else 0
+
+    if s1[m - 1] == s2[n - 1]:
+        return commonChild(s1[:m - 1], s2[:n - 1]) + 1
+    else:
+        x = commonChild(s1[:m], s2[:n - 1])
+        y = commonChild(s1[:m - 1], s2[:n])
+        return x if x > y else y
+
+
+def commonChild(s1, s2):
+    m, n = len(s1), len(s2)
+    higher = lower = [0] * (n + 1)
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                lower[j] = higher[j - 1] + 1
+
+                # print(lower)
+            else:
+                lower[j] = max(lower[j - 1], higher[j])
+        print(lower)
+        higher = lower
+
+    return higher
+
+
+print(commonChild("AA", "BB"))
+print(commonChild("SHINCHAN", "NOHARAAA"))
+print(commonChild_slow("SHINCHAN", "NOHARAAA"))
+
+# print(commonChild("WEWOUCUIDGCGTRMEZEPXZFEJWISRSBBSYXAYDFEJJDLEBVHHKS","FDAGCXGKCTKWNECHMRXZWMLRYUCOCZHJRRJBOAJOQJZZVUYXIC"))
