@@ -146,7 +146,7 @@ def commonChild_DP_yet_slow(s1, s2):
 
 def commonChild(s1, s2):
     m, n = len(s1), len(s2)
-    higher = lower = [0] * (n + 1)
+    higher, lower = [0] * (n + 1), [0] *(n+1)
     for i in range(1, m + 1):
         for j in range(1, n + 1):
             if s1[i - 1] == s2[j - 1]:
@@ -155,14 +155,22 @@ def commonChild(s1, s2):
                 # print(lower)
             else:
                 lower[j] = max(lower[j - 1], higher[j])
-        print(lower)
-        higher = lower
+        higher = lower[:]
 
-    return higher
+    return higher[-1]
+
+'''
+function max always give TIMEOUT error, writing your own 'max' function can avoid the same issue
+a, b = lower[j - 1], higher[j]
+                if a > b:
+                    lower[j] = a
+                else:
+                    lower[j] = b
+'''
 
 
 print(commonChild("AA", "BB"))
 print(commonChild("SHINCHAN", "NOHARAAA"))
 print(commonChild_slow("SHINCHAN", "NOHARAAA"))
 
-# print(commonChild("WEWOUCUIDGCGTRMEZEPXZFEJWISRSBBSYXAYDFEJJDLEBVHHKS","FDAGCXGKCTKWNECHMRXZWMLRYUCOCZHJRRJBOAJOQJZZVUYXIC"))
+print(commonChild("WEWOUCUIDGCGTRMEZEPXZFEJWISRSBBSYXAYDFEJJDLEBVHHKS","FDAGCXGKCTKWNECHMRXZWMLRYUCOCZHJRRJBOAJOQJZZVUYXIC"))
