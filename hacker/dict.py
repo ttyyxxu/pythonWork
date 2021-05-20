@@ -116,9 +116,9 @@ a = "1 17 80 68 5 5 58 17 38 81 26 44 38 6 12 11 37 67 70 16 19 35 71 16 32 45 7
 list_a = list(map(int,a.split()))
 
 
-print(countTriplets([1,4,16,64],4))
-print(countTriplets([1,3,9,9,27,81],3))
-print(countTriplets([1,5,5,25,125],5))
+# print(countTriplets([1,4,16,64],4))
+# print(countTriplets([1,3,9,9,27,81],3))
+# print(countTriplets([1,5,5,25,125],5))
 #print(countTriplets(list_a,3))
 
 # what about [0, 4, 3, 2, 0, 2, 2, 1, 4, 3, 0, 0, 0, 1, 1, 1, 2, 4, 3, 4, 0]
@@ -138,5 +138,58 @@ def count4plets(arr, r):
         dict_x_1[x] = dict_x_1.get(x,0) + 1
     return count
 
-print(count4plets([1,2,1,1,1,1,1,1],1))
-print(count4plets([1,2,2,4,8,16,32],2))
+# print(count4plets([1,2,1,1,1,1,1,1],1))
+# print(count4plets([1,2,2,4,8,16,32],2))
+
+from collections import Counter
+
+def freqQuery_normal_but_slow(queries):
+    array = []
+    output = []
+    number_count = Counter(array)
+    for op,num in queries:
+        if op == 1:
+            array.append(num)
+            number_count[num] += 1
+        elif op == 2:
+            if num in array:
+                array.remove(num)
+                number_count[num] -= 1
+        elif op == 3:
+            if num in number_count.values():
+                output.append(1)
+            else:
+                output.append(0)
+    return output
+
+
+def freqQuery(queries):
+    output = []
+    number_count = Counter([])
+    freq_dict = {}
+    for op,num in queries:
+        if op == 1:
+            f = number_count.get(num,0)
+            number_count[num] = f + 1
+            if f > 0:
+                freq_dict[f].remove(num)
+            freq_dict.setdefault(f + 1,[]).append(num)
+
+        elif op == 2:
+            f = number_count.get(num,0)
+            if f > 0:
+                number_count[num] = f - 1
+                freq_dict[f].remove(num)
+                if f > 1:
+                    freq_dict.setdefault(f-1, []).append(num)
+
+        elif op == 3:
+            if freq_dict.get(num,[]) == []:
+                output.append(0)
+            else:
+                output.append(1)
+    # print(freq_dict)
+    return output
+
+print(freqQuery([(1,1),(2,2),(3,2),(1,1),(1,1),(2,1),(3,2)]))
+
