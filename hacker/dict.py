@@ -122,3 +122,21 @@ print(countTriplets([1,5,5,25,125],5))
 #print(countTriplets(list_a,3))
 
 # what about [0, 4, 3, 2, 0, 2, 2, 1, 4, 3, 0, 0, 0, 1, 1, 1, 2, 4, 3, 4, 0]
+
+''' 
+let's do some challenge of counting 4-level tuple
+'''
+def count4plets(arr, r):
+    dict_x_1 = {}
+    dict_x_2 = {}
+    dict_x_3 = {}
+    count = 0
+    for x in reversed(arr):
+        count += dict_x_3.get((x*r,x*r*r,x*r*r*r),0)
+        dict_x_3[(x,x*r,x*r*r)] = dict_x_3.get((x,x*r,x*r*r),0) + dict_x_2.get((x*r,x*r*r),0)
+        dict_x_2[(x,x*r)] = dict_x_2.get((x,x*r),0) + dict_x_1.get(x*r,0)
+        dict_x_1[x] = dict_x_1.get(x,0) + 1
+    return count
+
+print(count4plets([1,2,1,1,1,1,1,1],1))
+print(count4plets([1,2,2,4,8,16,32],2))
