@@ -191,5 +191,31 @@ def freqQuery(queries):
     # print(freq_dict)
     return output
 
-print(freqQuery([(1,1),(2,2),(3,2),(1,1),(1,1),(2,1),(3,2)]))
+# print(freqQuery([(1,1),(2,2),(3,2),(1,1),(1,1),(2,1),(3,2)]))
 
+import bisect
+
+'''
+with bisect, this is NlogN.
+Please note B is a list which stores the last number of len=1,2,3,... LIS
+'''
+def longestIncreasingSubseq(arr):
+    B = []
+    for i in arr:
+        if len(B) == 0:
+            B.append(i)
+        else:
+            loc = bisect.bisect(B,i)
+            if loc == len(B):
+                B.append(i)
+            else:
+                B[loc] = i
+        print(B)
+
+
+# longestIncreasingSubseq([0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15])
+
+
+
+
+def sherlockAndAnagrams(s):
