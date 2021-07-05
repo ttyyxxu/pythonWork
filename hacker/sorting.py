@@ -9,7 +9,7 @@ def activityNotifications(expenditure, d):
     return notice
 
 activityNotifications([2, 3, 4, 2, 3, 6, 8, 4, 5],5)
-
+activityNotifications([1,2,3,4,4],4)
 '''
 STDIN               Function
 -----               --------
