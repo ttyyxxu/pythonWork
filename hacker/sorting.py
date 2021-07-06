@@ -1,5 +1,6 @@
 import statistics
-def activityNotifications(expenditure, d):
+from collections import deque
+def activityNotifications_normal_yet_slow(expenditure, d):
     notice = 0
     ll = len(expenditure)
     for i in range(d,ll):
@@ -7,6 +8,9 @@ def activityNotifications(expenditure, d):
             print(expenditure[i], expenditure[i-d:i], statistics.median(expenditure[i-d:i]))
             notice+=1
     return notice
+
+def activityNotifications(expenditure, d):
+
 
 activityNotifications([2, 3, 4, 2, 3, 6, 8, 4, 5],5)
 activityNotifications([1,2,3,4,4],4)
