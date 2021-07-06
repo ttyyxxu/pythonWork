@@ -76,10 +76,7 @@ def countTriplets_1st(arr, r):
 def countTriplets(arr, r):
     # [1,1,1,1,1,1,1]
 
-    # if r == 1:
-    #     l = len(arr)
-    #     print(l)
-    #     return int(l * (l - 1) * (l - 2) / 6)
+
     '''
     有了下面的code，我不再需要特殊处理 r=1的情况，并且上面r=1的情况也不完善，没有考虑 !=1的干扰
     '''
