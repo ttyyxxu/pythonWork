@@ -71,7 +71,7 @@ def topArticles(limit):
     result = {}
     limited_result = []
     for article in data_json['data']:
-        name = ''
+
         if article['title'] == '' and article['story_title'] is None:
             continue
         if article['title'] != '':
@@ -86,3 +86,5 @@ def topArticles(limit):
 
     result_sorted = sorted(zip(result.values(), result.keys()),reverse=True)
     print(result_sorted[0:limit])
+
+topArticles(4)
