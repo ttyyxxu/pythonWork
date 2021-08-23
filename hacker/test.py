@@ -1,4 +1,7 @@
-import re
+import requests
+import time
+from urllib.request import urlopen
+import json
 
 # inputstr = "A10;S20;W10;D30;X;A1A;B10A11;;A10;"
 #
@@ -35,11 +38,7 @@ def betterCompression(s):
 # betterCompression('a3c9b2c1')
 
 
-import requests
-import re
-import time
-from urllib.request import urlopen
-import json
+
 """
 website = 'https://www.vmgirls.com/13344.html'
 
