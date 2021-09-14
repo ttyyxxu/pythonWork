@@ -84,6 +84,6 @@ def topArticles(limit):
     print(result)
 
     result_sorted = sorted(zip(result.values(), result.keys()),reverse=True)
-    print(result_sorted)
+    print(result_sorted[0:limit])
 
 topArticles(4)

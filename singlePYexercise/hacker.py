@@ -83,7 +83,6 @@ def FindmissingWord(s,t):
     missing_words = indicies - set(word_in_t_list)
     return [s_list[x] for x in missing_words]
 
-
 def Interquartile_Range(N,X,F):
     # N = int(input())
     # X = list(map(int, input().strip().split()))
