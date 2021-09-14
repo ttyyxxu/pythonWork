@@ -2,7 +2,7 @@ import zipfile
 import string
 import itertools
 import os
-filename = "langages.zip"
+filename = "fail.zip"
 
 chars = string.digits + string.ascii_lowercase
 
@@ -13,7 +13,7 @@ def unzip (filename, password):
         return True
     except:
         return False
-'''
+
 for cc in itertools.permutations(chars, 3):
     secret = "".join(cc)
     if unzip (filename, secret):
@@ -21,10 +21,4 @@ for cc in itertools.permutations(chars, 3):
         break
     else:
         print(f"failed with {secret}")
-'''
-print(os.getcwd())
-secret = "123"
 
-
-with zipfile.ZipFile(filename) as zfile:
-    zfile.extractall("./", pwd=secret.encode('utf-8'))
